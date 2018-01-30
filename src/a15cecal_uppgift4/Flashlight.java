@@ -1,5 +1,13 @@
 package a15cecal_uppgift4;
 
-public class Flashlight {
+// Same for this class, this is for implementing polymorphism for the cart
+public class Flashlight extends Item {
+	public int getPrice() {
+		return 125;
+	}
+
+	public String getProductName() {
+		return "Flashlight";
+	}
 
 }

@@ -1,10 +1,17 @@
 package a15cecal_uppgift4;
 
+import javax.swing.*;
+
 public class Uppgift4 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				@SuppressWarnings("unused")
+				GUI applicationWindow = new GUI("The tiny webshop");
+			}
+		});
 	}
 
 }
