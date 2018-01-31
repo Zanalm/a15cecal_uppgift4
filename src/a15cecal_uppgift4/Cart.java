@@ -9,9 +9,7 @@ public class Cart implements CartGUI {
 	public Cart() {
 	}
 
-	/**
-	 * A simple method to clear the cart
-	 */
+	// A simple method for clearing the cart
 	public void clearCart() {
 		cart.clear();
 	}
@@ -19,8 +17,6 @@ public class Cart implements CartGUI {
 	/**
 	 * A method to iterate over all items in the cart and add all the prices,
 	 * resulting in a total price of the cart
-	 *
-	 * @return totalPrice
 	 */
 	public int totalCost() {
 		int totalPrice = 0;
@@ -30,39 +26,22 @@ public class Cart implements CartGUI {
 		return totalPrice;
 	}
 
-	/**
-	 * Returns the amount of items in cart
-	 *
-	 * @return
-	 */
+	// Returns the amount of items in cart
 	public int itemsInCart() {
 		return cart.size();
 	}
 
-	/**
-	 * Returns the price of the latest item in cart
-	 *
-	 * @return Price of item
-	 */
+	// Returns the price of the latest item in cart
 	public int latestItemPrice() {
 		return cart.get(cart.size() - 1).getPrice();
 	}
 
-	/**
-	 * Returns the name of the latest item in cart
-	 *
-	 * @return Name of item
-	 */
+	// Returns the name of the latest item in cart
 	public String latestItemName() {
 		return cart.get(cart.size() - 1).getProductName();
 	}
 
-	/**
-	 * Adds an item, depending on what the name of said item is. This is to enable
-	 * expandability to the cart, customizing it to other needs.
-	 *
-	 * @param name
-	 */
+	// Adds an item. This is to enable expansion for the cart
 	public void addItem(String name) {
 		switch (name) {
 		case "Bag":

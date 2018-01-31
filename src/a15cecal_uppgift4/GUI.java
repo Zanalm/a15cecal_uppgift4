@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class GUI extends JFrame {
 	private static final long serialVersionUID = 8956595341030113259L;
 	private Cart cart = new Cart();
@@ -14,24 +13,21 @@ public class GUI extends JFrame {
 	private JLabel totalPrice;
 	private JLabel latestPurchase;
 
-	 // Default constructor for the class GUI
+	// Default constructor for the class GUI
 	public GUI(String title) {
-		super(title); // Pushes the title of the window to the superclass, this is sets the title of
-						// the window
-		appSettings(); // Applies all settings of the window
-		buttons(); // Creates all the buttons
-		labels(); // Creates all the labels
-		setTextArea(); // Creates the textArea
+		super(title); // Pushes the title of the window
+		appSettings(); // Applies all settings for the window
+		buttons(); // Creates all the buttons needed
+		labels(); // Creates the labels
+		setTextArea(); // Creates the textArea for the window
 	}
 
 	/**
-	 * A method to set the size, position, layout, visibility and how to quit the
-	 * application. These settings where broken out of the Main-class to minimize
-	 * clutter in the code
+	 * A method that sets the size, visibility etc. and how to quit the application
 	 */
 	private void appSettings() {
 		setLayout(new GridBagLayout()); // Sets the layout to GridBagLayout
-		this.setSize(640, 480); // Sets the size of the window
+		this.setSize(650, 450); // Sets the size of the window
 		this.setLocationRelativeTo(null); // Centers the window relative to null, rendering the window in the center of
 											// the screen
 		this.setVisible(true);
@@ -43,37 +39,39 @@ public class GUI extends JFrame {
 	 * A method to set the text areas for the application
 	 */
 	private void setTextArea() {
+		Color clr1 = new Color(0.85f, 0.90f, 0.95f); /*
+														 * This is for changing color, the default colors were too
+														 * bright so created one that fit better
+														 */
+
 		GridBagConstraints gc = new GridBagConstraints(); // A GridBagConstraints to specify where the elements should
 															// appear
-		gc.fill = GridBagConstraints.BOTH; // Forces the element to fill all possible space that it can.
+		gc.fill = GridBagConstraints.BOTH; // Forces element to fill the space that is available
 		gc.weightx = 1; // Specifies the weight of the element. This makes the element fill a greater
 						// area
 		gc.weighty = 1; // Same as above, but only on the y-axis
 		gc.gridwidth = 4; // How many cells this element should span
 		gc.gridx = 0; // Position of the element on the x-axis
 		gc.gridy = 2; // Position of the element on the y-axis
-		gc.insets = new Insets(0, 15, 0, 15); // Insets are used to create som
-		textArea = new JTextArea(); // Declares the variable as a new JTextArea
-		textArea.setEditable(false); // Makes the textArea not editable
-		textArea.setLineWrap(true); // Turns on LineWrap
-		textArea.setWrapStyleWord(true); // Forces the wrap to wrap on word, instead of wrapping per character
+		gc.insets = new Insets(0, 15, 0, 150);
+		textArea = new JTextArea();
+		textArea.setEditable(false); // Makes it so that the user can't edit the text in the textArea
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		textArea.setBackground(clr1); // Implements the created color
 
-		JScrollPane jScrollPane = new JScrollPane(textArea); // Creates a JScrollPane with the textArea, resulting in a
-																// scrollable textArea
-
-		add(jScrollPane, gc); // Adds the JScrollPane to the GridBagLayout with the information from the
-								// GridBagConstraint
+		JScrollPane jScrollPane = new JScrollPane(textArea); // Creates a JScrollPane with the textArea. This makes it
+																// possible to scroll
+		add(jScrollPane, gc);
 	}
 
-	/**
-	 * Updates the important labels that are not directly dependent on Item
-	 */
+	// Updates the labels that are not controlled/inherited by Item
 	private void labels() {
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.fill = GridBagConstraints.HORIZONTAL;
 		gc.gridx = 0;
-		gc.gridy = 1;
-		gc.weightx = 0.1;
+		gc.gridy = 1; // Decides where the label will show up
+		gc.weightx = 0.5;
 		gc.weighty = 0.1;
 		gc.gridwidth = 4;
 		gc.insets = new Insets(0, 15, 0, 15);
@@ -97,29 +95,33 @@ public class GUI extends JFrame {
 	private void buttons() {
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.fill = GridBagConstraints.HORIZONTAL;
-		gc.insets = new Insets(5, 5, 5, 5);
+		gc.insets = new Insets(5, 5, 5, 5); // Decides height and space for the buttons
 		gc.gridwidth = 1;
 		gc.weightx = 0.1;
 		gc.weighty = 0.1;
 		gc.gridx = 0;
 		gc.gridy = 0;
 
-		// When the button in pressed, a description is sent of the button that was pressed
-		// to the handler
+		// When the button in pressed, a description is sent of the button that was
+		// pressed
+		// to the event handler
 		JButton buyBicycleButton = new JButton("Buy bicycle"); // Creates a new button with the label buy bicycle
-		buyBicycleButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able, changes default
-		 buyBicycleButton.addActionListener(new ActionListener() { // An anonymous class
+		buyBicycleButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates for the user that
+																	// it's click-able,
+																	// changes default
+		buyBicycleButton.addActionListener(new ActionListener() { // An anonymous class
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				buttonWasPressed("Bicycle");
-			} 
+			}
 		});
 		;
 		add(buyBicycleButton, gc); // Adds the button to the layout of the interface
 
 		gc.gridx++; // Moves 1 position on the x-axis
 		JButton buyFlashlightButton = new JButton("Buy flashlight");
-		buyFlashlightButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able, changes default
+		buyFlashlightButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able,
+																		// changes default
 		buyFlashlightButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -130,7 +132,8 @@ public class GUI extends JFrame {
 
 		gc.gridx++;
 		JButton buyBagButton = new JButton("Buy bag");
-		buyBagButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able, changes default
+		buyBagButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able, changes
+																// default
 		buyBagButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -139,11 +142,16 @@ public class GUI extends JFrame {
 		});
 		add(buyBagButton, gc);
 
-		Color clr1 = new Color(0.95f, 0.5f, 0.56f); // This is for changing color, the default colors were too bright so created one that fit better
+		Color clr2 = new Color(0.95f, 0.5f, 0.56f); /*
+													 * This is for changing color, the default colors were too bright so
+													 * created one that fit better. This is just to indicate "danger"
+													 * for the user so that it doesn't click it by accident
+													 **/
 		gc.gridy++;
 		JButton clearButton = new JButton("Clear cart");
-		clearButton.setBackground(clr1);
-		clearButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able, changes default
+		clearButton.setBackground(clr2);
+		clearButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able, changes
+																// default
 		clearButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -155,38 +163,34 @@ public class GUI extends JFrame {
 	}
 
 	/**
-	 * A method to handle an action created by the buttons. It uses a switch case to
-	 * handle the different buttons This is preferable due to expandability, to add
-	 * a new Item, simply create a new Item, add a button and add a entry to this
-	 * switch case and the cart switch case. This was the simplest way of handling
-	 * expanding the application.
-	 *
-	 * @param name
-	 *            The name of the button that was pressed
+	 * A method to handle an action created by the buttons. A switch is used to
+	 * handle all the different buttons. Makes the case of adding new buttons
+	 * easier. This was the easiest way of handling the scenario of wanting to
+	 * expand the application.
 	 */
 	private void buttonWasPressed(String name) {
 		switch (name) { // A switch case to handle the different names of the buttons
 		case "Bag":
 			cart.addItem(name);
-			textArea.append("[Bag]");
+			textArea.append("[Bag] ");
 			break;
 		case "Bicycle":
 			cart.addItem(name);
-			textArea.append("[Bicycle]");
+			textArea.append("[Bicycle] ");
 			break;
 		case "Flashlight":
 			cart.addItem(name);
-			textArea.append("[Flashlight]");
+			textArea.append("[Flashlight] ");
 			break;
 		case "Clear cart":
 			cart.clearCart();
-			textArea.setText("");
+			textArea.setText(""); // Makes the textArea look empty
 			latestPurchase.setText("Cart was cleared");
 			break;
 		}
 
-		if (!name.equals("Clear cart")) { // If the button that was pressed is not the "Clear cart"-button, append a
-											// space and update the latestPurchase
+		if (!name.equals("Clear cart")) { // If the button that was pressed is not the "Clear cart"-button an additional
+											// space is added and update the latestPurchase
 			textArea.append(" ");
 			updateLatestPurchase();
 		}
@@ -201,9 +205,7 @@ public class GUI extends JFrame {
 		numberOfItemsInCart.setText("The number of items in cart is: " + cart.itemsInCart());
 	}
 
-	/**
-	 * Updates the the JLabel with the latest purchase.
-	 */
+	// Updates the the JLabel with the latest purchase
 	private void updateLatestPurchase() {
 		latestPurchase.setText(
 				cart.latestItemName() + " with cost of " + cart.latestItemPrice() + " kr is being added to the cart");

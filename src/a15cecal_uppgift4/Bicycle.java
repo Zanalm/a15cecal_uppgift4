@@ -4,7 +4,7 @@ package a15cecal_uppgift4;
 public class Bicycle extends Item {
 
 	public int getPrice() {
-		return 6521;
+		return 1995;
 	}
 
 	public String getProductName() {
