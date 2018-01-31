@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class GUI extends JFrame {
 	private static final long serialVersionUID = 8956595341030113259L;
 	private Cart cart = new Cart();
@@ -13,12 +14,7 @@ public class GUI extends JFrame {
 	private JLabel totalPrice;
 	private JLabel latestPurchase;
 
-	/**
-	 * Default constructor for the class ApplicationWindow
-	 *
-	 * @param title
-	 *            The title for the Swing-Application
-	 */
+	 // Default constructor for the class GUI
 	public GUI(String title) {
 		super(title); // Pushes the title of the window to the superclass, this is sets the title of
 						// the window
@@ -81,7 +77,7 @@ public class GUI extends JFrame {
 		gc.weighty = 0.1;
 		gc.gridwidth = 4;
 		gc.insets = new Insets(0, 15, 0, 15);
-		numberOfItemsInCart = new JLabel("The number of items in cart is 0");
+		numberOfItemsInCart = new JLabel("The number of items in cart is:  0");
 		add(numberOfItemsInCart, gc);
 		gc.gridy = 3;
 		gc.anchor = GridBagConstraints.LINE_START;
@@ -90,7 +86,7 @@ public class GUI extends JFrame {
 		gc.weighty = 0.2;
 		gc.weightx = 0.2;
 		gc.gridy = 4;
-		latestPurchase = new JLabel("Nothing in cart, yet", SwingConstants.CENTER);
+		latestPurchase = new JLabel("Nothing in cart, let's change that", SwingConstants.CENTER);
 		add(latestPurchase, gc);
 	}
 
@@ -108,19 +104,22 @@ public class GUI extends JFrame {
 		gc.gridx = 0;
 		gc.gridy = 0;
 
-		JButton buyBicycleButton = new JButton("Buy bicycle"); // Creates a new button with a label
-		buyBicycleButton.addActionListener(new ActionListener() { // An anonymous class
+		// When the button in pressed, a description is sent of the button that was pressed
+		// to the handler
+		JButton buyBicycleButton = new JButton("Buy bicycle"); // Creates a new button with the label buy bicycle
+		buyBicycleButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able, changes default
+		 buyBicycleButton.addActionListener(new ActionListener() { // An anonymous class
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				buttonWasPressed("Bicycle");
-			} // When the button in pressed, send a description of the button that was pressed
-				// to the handler
+			} 
 		});
 		;
-		add(buyBicycleButton, gc); // Adds the button to the layout
+		add(buyBicycleButton, gc); // Adds the button to the layout of the interface
 
 		gc.gridx++; // Moves 1 position on the x-axis
 		JButton buyFlashlightButton = new JButton("Buy flashlight");
+		buyFlashlightButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able, changes default
 		buyFlashlightButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -131,6 +130,7 @@ public class GUI extends JFrame {
 
 		gc.gridx++;
 		JButton buyBagButton = new JButton("Buy bag");
+		buyBagButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able, changes default
 		buyBagButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -139,8 +139,11 @@ public class GUI extends JFrame {
 		});
 		add(buyBagButton, gc);
 
-		gc.gridx++;
+		Color clr1 = new Color(0.95f, 0.5f, 0.56f); // This is for changing color, the default colors were too bright so created one that fit better
+		gc.gridy++;
 		JButton clearButton = new JButton("Clear cart");
+		clearButton.setBackground(clr1);
+		clearButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able, changes default
 		clearButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -195,7 +198,7 @@ public class GUI extends JFrame {
 	 */
 	private void updateLabels() {
 		totalPrice.setText("The total cost is: " + cart.totalCost() + " kr");
-		numberOfItemsInCart.setText("The number of items in cart is " + cart.itemsInCart());
+		numberOfItemsInCart.setText("The number of items in cart is: " + cart.itemsInCart());
 	}
 
 	/**
