@@ -9,7 +9,7 @@ public class Uppgift4 {
 			@Override
 			public void run() {
 				@SuppressWarnings("unused")
-				GUI applicationWindow = new GUI("The tiny webshop");
+				GUI applicationWindow = new GUI("The tiny webshop"); // The name that later on will be shown as the application-window-name
 			}
 		});
 	}

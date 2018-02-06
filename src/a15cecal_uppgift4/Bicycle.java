@@ -1,6 +1,6 @@
 package a15cecal_uppgift4;
 
-// Implements polymorphism in the cart by having a class that extends the class Item
+// Same as for Flashlight
 public class Bicycle extends Item {
 
 	public int getPrice() {

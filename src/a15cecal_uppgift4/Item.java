@@ -1,12 +1,8 @@
 package a15cecal_uppgift4;
 
-/**
- * 
- * This makes it possible to use polymorphism later on. This class is abstract
- * and it defines the class-children methods
- */
+// This class is an abstract class. This is good for code that is being shared with other related classes. 
 public abstract class Item {
-	public abstract int getPrice();
+	public abstract int getPrice(); // Gets the price for the item
 
 	public abstract String getProductName();
 }
