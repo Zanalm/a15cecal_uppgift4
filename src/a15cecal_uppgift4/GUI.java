@@ -1,9 +1,11 @@
 package a15cecal_uppgift4;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 
 public class GUI extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -104,6 +106,16 @@ public class GUI extends JFrame {
 													 **/
 		gc.gridy++;
 		JButton btnClear = new JButton("Clear cart");
+		try {
+			Image img = ImageIO.read(getClass().getResource("images/ex.png")); // This adds an image I made to the
+																				// button "clear cart". A bit more of an
+																				// UX-approach to the design, even
+																				// thought a lot is missing in that
+																				// perspective
+			btnClear.setIcon(new ImageIcon(img));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
 		btnClear.setBackground(clr2);
 		btnClear.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able, changes
 															// default
@@ -172,12 +184,8 @@ public class GUI extends JFrame {
 		add(jScrollPane, bagConstraints);
 	}
 
-	/**
-	 * A method to handle an action created by the buttons. A switch is used to
-	 * handle all the different buttons. Makes the case of adding new buttons
-	 * easier. This was the easiest way of handling the scenario of wanting to
-	 * expand the application.
-	 */
+	// This handles the case when an button is pressed, the set actions for said
+	// button
 	private void buttonPressed(String ItemName) {
 		switch (ItemName) {
 		case "Bag":
@@ -199,19 +207,16 @@ public class GUI extends JFrame {
 			break;
 		}
 
-		if (!ItemName.equals("Clear cart")) { // If the button that was pressed is not the "Clear cart"-button an additional
-											// space is added and update the latest purchase
-			textArea.append(" ");
+		if (!ItemName.equals("Clear cart")) { // If the button that was pressed is not the "Clear cart"-button an
+												// additional
+												// space is added and this updates the cart to the latest purchase
 			LatestPurchase();
 		}
 		updateLabels();
 	}
 
-	/**
-	 * Updates the labels that are not dependent on Item
-	 */
 	private void updateLabels() {
-		totalPrice.setText("The total cost is: " + cart.totalCost() + " kr");
+		totalPrice.setText("Total cost: " + cart.totalCost() + " kr");
 		ItemsInCart.setText("The number of items in cart is: " + cart.itemsInCart());
 	}
 
