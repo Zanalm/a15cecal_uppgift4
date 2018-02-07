@@ -15,7 +15,7 @@ public class GUI extends JFrame {
 	private JLabel totalPrice;
 	private JLabel latestPurchase;
 
-	// Default constructor for the class GUI
+	// This is the constructor for the class GUI
 	public GUI(String title) {
 		super(title); // This is for the title at the top of the window to be shown correctly
 		appSettings(); // Applies all settings for the window defined further down
@@ -56,13 +56,20 @@ public class GUI extends JFrame {
 		gc.fill = GridBagConstraints.HORIZONTAL;
 		gc.gridx = 0;
 		gc.gridy = 0;
-		gc.insets = new Insets(5, 5, 5, 5); // Decides height and space for the buttons
+		gc.insets = new Insets(15, 15, 15, 15); // Decides height and space for the buttons
 		gc.gridwidth = 1;
 
 		// When the button in pressed, a description is sent of the button that was
 		// pressed to the event handler
-		JButton btnBuyBicycle = new JButton("Buy bicycle"); // Creates a new button with the label buy bicycle
-		btnBuyBicycle.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates for the user that the
+		JButton btnBuyBicycle = new JButton(); // Creates a new button
+		// For image
+		try {
+			Image img1 = ImageIO.read(getClass().getResource("images/bicycle.png")); // reads in the image 
+			btnBuyBicycle.setIcon(new ImageIcon(img1)); // The created button uses an icon to symbolize it's meaning instead of text
+		} catch (Exception ex) {
+		}
+		// end for image
+		btnBuyBicycle.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Changed this so that the cursor indicates for the user that the
 																	// button is click-able,
 																	// changes default
 		btnBuyBicycle.addActionListener(new ActionListener() {
@@ -76,7 +83,15 @@ public class GUI extends JFrame {
 
 		gc.gridx++; // Moves 1 position to the horizontal line so that they'll align correctly next
 					// to each other
-		JButton btnBuyFlashlight = new JButton("Buy flashlight");
+		JButton btnBuyFlashlight = new JButton();
+		// For image
+		try {
+			Image img2 = ImageIO.read(getClass().getResource("images/flashlight.png")); // This reads in an image I made for the button
+			// perspective
+			btnBuyFlashlight.setIcon(new ImageIcon(img2)); // Makes the icon appear for the button
+		} catch (Exception ex) {
+		}
+		// end for image
 		btnBuyFlashlight.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able,
 																	// changes default
 		btnBuyFlashlight.addActionListener(new ActionListener() {
@@ -88,7 +103,19 @@ public class GUI extends JFrame {
 		add(btnBuyFlashlight, gc);
 
 		gc.gridx++;
-		JButton btnBuyBag = new JButton("Buy bag");
+		JButton btnBuyBag = new JButton();
+		// For image
+		try {
+			Image img3 = ImageIO.read(getClass().getResource("images/bag.png")); // This adds an image I made to
+																				// the
+			// button "clear cart". A bit more of an
+			// UX-approach to the design, even
+			// thought a lot is missing in that
+			// perspective
+			btnBuyBag.setIcon(new ImageIcon(img3));
+		} catch (Exception ex) {
+		}
+		// end for image
 		btnBuyBag.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able, changes
 																// default
 		btnBuyBag.addActionListener(new ActionListener() {
@@ -100,22 +127,23 @@ public class GUI extends JFrame {
 		add(btnBuyBag, gc);
 
 		Color clr2 = new Color(0.95f, 0.5f, 0.56f); /*
-													 * This is for changing color, the default colors were too bright so
+													 * This is for changing color, the default colors were too intense so
 													 * created one that fit better. This is just to indicate "danger"
 													 * for the user so that it doesn't click it by accident
 													 **/
 		gc.gridy++;
 		JButton btnClear = new JButton("Clear cart");
+		// For image
 		try {
-			Image img = ImageIO.read(getClass().getResource("images/ex.png")); // This adds an image I made to the
+			Image img4 = ImageIO.read(getClass().getResource("images/ex.png")); // This adds an image I made to the
 																				// button "clear cart". A bit more of an
 																				// UX-approach to the design, even
 																				// thought a lot is missing in that
 																				// perspective
-			btnClear.setIcon(new ImageIcon(img));
+			btnClear.setIcon(new ImageIcon(img4));
 		} catch (Exception ex) {
-			System.out.println(ex);
 		}
+		// end for image
 		btnClear.setBackground(clr2);
 		btnClear.setCursor(new Cursor(Cursor.HAND_CURSOR)); // So that the cursor indicates it's click-able, changes
 															// default
@@ -135,13 +163,14 @@ public class GUI extends JFrame {
 	 */
 	private void appSettings() {
 		setLayout(new GridBagLayout()); // Sets the layout to GridBagLayout
-		this.setSize(350, 450); // Sets the size of the window, decided to make it look kind of like an
+		this.setSize(450, 450); // Sets the size of the window, decided to make it look kind of like an
 								// calculator
 		this.setLocationRelativeTo(null); // This will make the dialog-window centered on the users screen. I find that
 											// this is the easiest way to do this
 		this.setVisible(true);
 		this.setResizable(true); // This lets the user re-size the window if wanted
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // This makes it possible to close the project from running
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // This line makes it possible to close the project from
+																// running
 																// completely (as in not in console) when X is clicked
 																// in the window
 	}
@@ -162,16 +191,18 @@ public class GUI extends JFrame {
 		GridBagConstraints bagConstraints = new GridBagConstraints(); // This is for a kind of grid that handles where
 																		// things in the
 		// application-window will appear
-		bagConstraints.fill = GridBagConstraints.BOTH; // This forces the area to take up the available space in the
-														// window. Without
-		// it it'll be very tiny
+		bagConstraints.fill = GridBagConstraints.BOTH; // Makes the area take up the available space in the
+														// window. Without it it'll be very tiny
 		bagConstraints.weighty = 1;
 		bagConstraints.gridwidth = 4; // How many cells this element should span, makes the are take up 4 cells and
 		// stretching to a good width
 		bagConstraints.gridx = 0; // This declares where on the X-axis it will "begin", where it will show.
 		bagConstraints.gridy = 2; // Same for this one, except on the Y.
 		bagConstraints.insets = new Insets(0, 15, 0, 150); // This is for the borders.
-		textArea = new JTextArea(); // Creates a new JTextArea, from the java.awt-library
+		
+		textArea = new JTextArea(); 
+		
+		// Creates a new JTextArea, from the java.awt-library
 		textArea.setEditable(false); // Makes it so that the user can't edit the text in the textArea, we wouldn't
 										// want that, they are supposed to use the buttons for editing the cart
 		textArea.setLineWrap(true); // Makes the output-text in the TextArea jump to a new line when reaching the
@@ -190,7 +221,7 @@ public class GUI extends JFrame {
 		switch (ItemName) {
 		case "Bag":
 			cart.addItem(ItemName);
-			textArea.append("[Bag] "); /* This is the text shown in the cart */
+			textArea.append("[Bag] "); /* This is the text shown in the cart a.k.a the textArea */
 			break;
 		case "Bicycle":
 			cart.addItem(ItemName);
