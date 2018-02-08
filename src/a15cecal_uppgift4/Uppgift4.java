@@ -14,5 +14,20 @@ public class Uppgift4 {
 			}
 		});
 	}
+	
+	// For the interface
+	public interface CartGUI {
+		int addedItemPrice();
+
+		void clearCart();
+
+		int totalCost();
+
+		String lastAddedItemName();
+
+		void addItem(String name);
+
+		int itemsInCart();
+	}
 
 }

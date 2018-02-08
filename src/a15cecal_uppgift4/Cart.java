@@ -2,6 +2,8 @@ package a15cecal_uppgift4;
 
 import java.util.ArrayList;
 
+import a15cecal_uppgift4.Uppgift4.CartGUI;
+
 // This means that this class will implement the interface CartGUI
 public class Cart implements CartGUI {
 	private ArrayList<Item> cartItems = new ArrayList<>(); // This initialize a new ArrayList with the type it can

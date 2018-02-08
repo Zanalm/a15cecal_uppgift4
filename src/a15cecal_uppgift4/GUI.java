@@ -5,46 +5,55 @@ import java.awt.event.ActionListener;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import java.awt.*;
 
 public class GUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private Cart cart = new Cart();
-	private JTextArea textArea;
-	private JLabel ItemsInCart;
-	private JLabel totalPrice;
 	private JLabel latestPurchase;
+	private JTextArea textWindow;
+	private JLabel totalCost;
+	private JLabel ItemsInCart;
 
-	// This is the constructor for the class GUI
 	public GUI(String title) {
 		super(title); // This is for the title at the top of the window to be shown correctly
 		appSettings(); // Applies all settings for the window defined further down
 		buttons(); // For creating all the buttons needed
-		labels(); // For creating the labels
+		TextInApp(); // For creating the labels
 		setTextArea(); // Creates the textArea for the window
 	}
+	
 
-	// Firstly we decide how the labels will be positioned. This updates the labels
-	private void labels() {
-		GridBagConstraints gc = new GridBagConstraints();
-		gc.fill = GridBagConstraints.HORIZONTAL;
-		gc.gridx = 0;
-		gc.gridy = 1; // Decides where the label will show up on y-axis
-		gc.weighty = 0.1;
-		gc.gridwidth = 4; /* helps setting out where labels and such will be positioned in grid */
-		gc.insets = new Insets(90, 15, 0, 15); // Made this small so that it only fills up and extends (by scrolling) if
-												// the user is adding many things in the basket. No need for it to be
-												// big from the start
+	private void updateTextInApp() {
+		totalCost.setText("Total cost: " + cart.totalCost() + " kr");
+		ItemsInCart.setText("The number of items in cart is: " + cart.itemsInCart());
+	}
+
+	private void LastBought() {
+		latestPurchase.setText(
+				cart.lastAddedItemName() + " with cost of " + cart.addedItemPrice() + " kr is being added to the cart");
+	}
+
+	// Firstly we set out the layout for how the labels for the cart will be
+	// positioned. This updates the labels
+	private void TextInApp() {
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 1;
+		c.weighty = 0.1;
+		c.gridwidth = 4; /* helps setting out where labels and such will be positioned in grid */
+		c.insets = new Insets(90, 15, 0, 15);
 		ItemsInCart = new JLabel("The number of items in cart is:  0");
-		add(ItemsInCart, gc);
-		gc.gridy = 3; // positions the label for number of items correctly
-		totalPrice = new JLabel("The total cost is: " + cart.totalCost() + " kr");
-		add(totalPrice, gc);
-		gc.weighty = 0.2;
-		gc.weightx = 0.2;
-		gc.gridy = 4;
-		latestPurchase = new JLabel("Nothing in cart, let's change that", SwingConstants.CENTER);
-		add(latestPurchase, gc);
+		add(ItemsInCart, c);
+		c.gridy = 3; // positions the label for number of items correctly
+		totalCost = new JLabel("The total cost is: " + cart.totalCost() + " kr");
+		add(totalCost, c);
+		c.weightx = 0.2;
+		c.gridy = 4;
+		latestPurchase = new JLabel("Nothing in cart, let's change that!", SwingConstants.CENTER);
+		add(latestPurchase, c);
 	}
 
 	/**
@@ -52,24 +61,24 @@ public class GUI extends JFrame {
 	 * creates what will happen when the user clicks on a button
 	 */
 	private void buttons() {
-		GridBagConstraints gc = new GridBagConstraints();
-		gc.fill = GridBagConstraints.HORIZONTAL;
-		gc.gridx = 0;
-		gc.gridy = 0;
-		gc.insets = new Insets(15, 15, 15, 15); // Decides height and space for the buttons
-		gc.gridwidth = 1;
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 0;
+		c.insets = new Insets(15, 15, 15, 15); // For height and space for the buttons
+		c.gridwidth = 1;
 
-		// When the button in pressed, a description is sent of the button that was
-		// pressed to the event handler
 		JButton btnBuyBicycle = new JButton(); // Creates a new button
 		// For image
 		try {
-			Image img1 = ImageIO.read(getClass().getResource("images/bicycle.png")); // reads in the image 
-			btnBuyBicycle.setIcon(new ImageIcon(img1)); // The created button uses an icon to symbolize it's meaning instead of text
+			Image img1 = ImageIO.read(getClass().getResource("images/bicycle.png")); // reads in the image
+			btnBuyBicycle.setIcon(new ImageIcon(img1)); // The created button uses an icon to symbolize it's meaning
+														// instead of text
 		} catch (Exception ex) {
 		}
 		// end for image
-		btnBuyBicycle.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Changed this so that the cursor indicates for the user that the
+		btnBuyBicycle.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Changed this so that the cursor indicates for the
+																	// user that the
 																	// button is click-able,
 																	// changes default
 		btnBuyBicycle.addActionListener(new ActionListener() {
@@ -79,14 +88,15 @@ public class GUI extends JFrame {
 			}
 		});
 		;
-		add(btnBuyBicycle, gc); // Adds the button for the interface
-
-		gc.gridx++; // Moves 1 position to the horizontal line so that they'll align correctly next
+		add(btnBuyBicycle, c); // Adds the button for the interface
+		c.gridx++; // Moves one position to the horizontal line so that they'll align correctly
+					// next
 					// to each other
 		JButton btnBuyFlashlight = new JButton();
 		// For image
 		try {
-			Image img2 = ImageIO.read(getClass().getResource("images/flashlight.png")); // This reads in an image I made for the button
+			Image img2 = ImageIO.read(getClass().getResource("images/flashlight.png")); // This reads in an image I made
+																						// for the button
 			// perspective
 			btnBuyFlashlight.setIcon(new ImageIcon(img2)); // Makes the icon appear for the button
 		} catch (Exception ex) {
@@ -100,14 +110,13 @@ public class GUI extends JFrame {
 				buttonPressed("Flashlight");
 			}
 		});
-		add(btnBuyFlashlight, gc);
-
-		gc.gridx++;
+		add(btnBuyFlashlight, c);
+		c.gridx++;
 		JButton btnBuyBag = new JButton();
 		// For image
 		try {
 			Image img3 = ImageIO.read(getClass().getResource("images/bag.png")); // This adds an image I made to
-																				// the
+																					// the
 			// button "clear cart". A bit more of an
 			// UX-approach to the design, even
 			// thought a lot is missing in that
@@ -124,14 +133,14 @@ public class GUI extends JFrame {
 				buttonPressed("Bag");
 			}
 		});
-		add(btnBuyBag, gc);
+		add(btnBuyBag, c);
 
 		Color clr2 = new Color(0.95f, 0.5f, 0.56f); /*
-													 * This is for changing color, the default colors were too intense so
-													 * created one that fit better. This is just to indicate "danger"
+													 * This is for changing color, the default colors were too intense
+													 * so created one that fit better. This is just to indicate "danger"
 													 * for the user so that it doesn't click it by accident
 													 **/
-		gc.gridy++;
+		c.gridy++;
 		JButton btnClear = new JButton("Clear cart");
 		// For image
 		try {
@@ -154,7 +163,7 @@ public class GUI extends JFrame {
 			}
 		});
 		;
-		add(btnClear, gc);
+		add(btnClear, c);
 	}
 
 	/**
@@ -163,8 +172,7 @@ public class GUI extends JFrame {
 	 */
 	private void appSettings() {
 		setLayout(new GridBagLayout()); // Sets the layout to GridBagLayout
-		this.setSize(450, 450); // Sets the size of the window, decided to make it look kind of like an
-								// calculator
+		this.setSize(400, 450); // Sets the size of the window, decided to make it kind of like calculator-size
 		this.setLocationRelativeTo(null); // This will make the dialog-window centered on the users screen. I find that
 											// this is the easiest way to do this
 		this.setVisible(true);
@@ -189,28 +197,26 @@ public class GUI extends JFrame {
 		 * course), uses the same logic
 		 */
 		GridBagConstraints bagConstraints = new GridBagConstraints(); // This is for a kind of grid that handles where
-																		// things in the
-		// application-window will appear
-		bagConstraints.fill = GridBagConstraints.BOTH; // Makes the area take up the available space in the
-														// window. Without it it'll be very tiny
-		bagConstraints.weighty = 1;
+																		// things in the application-window will appear
+		bagConstraints.fill = GridBagConstraints.BOTH;
 		bagConstraints.gridwidth = 4; // How many cells this element should span, makes the are take up 4 cells and
-		// stretching to a good width
+										// stretching to a good width
 		bagConstraints.gridx = 0; // This declares where on the X-axis it will "begin", where it will show.
 		bagConstraints.gridy = 2; // Same for this one, except on the Y.
 		bagConstraints.insets = new Insets(0, 15, 0, 150); // This is for the borders.
-		
-		textArea = new JTextArea(); 
-		
+
+		textWindow = new JTextArea();
+
 		// Creates a new JTextArea, from the java.awt-library
-		textArea.setEditable(false); // Makes it so that the user can't edit the text in the textArea, we wouldn't
+		textWindow.setEditable(false); // Makes it so that the user can't edit the text in the textArea, we wouldn't
 										// want that, they are supposed to use the buttons for editing the cart
-		textArea.setLineWrap(true); // Makes the output-text in the TextArea jump to a new line when reaching the
-									// end of the area
-		textArea.setWrapStyleWord(true); // This makes so that the word in above scenario doesn't get "chopped-off" in
+		textWindow.setLineWrap(true); // Makes the output-text in the TextArea jump to a new line when reaching the
+										// end of the area
+		textWindow.setWrapStyleWord(true); // This makes so that the word in above scenario doesn't get "chopped-off" in
 											// the middle, the whole word jumps down a line
-		textArea.setBackground(clr1); // Implements the created color above
-		JScrollPane jScrollPane = new JScrollPane(textArea); // JScrollPane makes it so that the user can scroll in the
+		textWindow.setBackground(clr1); // Implements the created color above
+		JScrollPane jScrollPane = new JScrollPane(textWindow); // JScrollPane makes it so that the user can scroll in
+																// the
 																// textArea
 		add(jScrollPane, bagConstraints);
 	}
@@ -221,19 +227,19 @@ public class GUI extends JFrame {
 		switch (ItemName) {
 		case "Bag":
 			cart.addItem(ItemName);
-			textArea.append("[Bag] "); /* This is the text shown in the cart a.k.a the textArea */
+			textWindow.append("[Bag] "); /* This is the text shown in the cart a.k.a the textArea */
 			break;
 		case "Bicycle":
 			cart.addItem(ItemName);
-			textArea.append("[Bicycle] ");
+			textWindow.append("[Bicycle] ");
 			break;
 		case "Flashlight":
 			cart.addItem(ItemName);
-			textArea.append("[Flashlight] ");
+			textWindow.append("[Flashlight] ");
 			break;
 		case "Clear cart":
 			cart.clearCart();
-			textArea.setText(""); // Makes the textArea look empty
+			textWindow.setText(""); // Makes the textArea look empty
 			latestPurchase.setText("Cart was cleared");
 			break;
 		}
@@ -241,19 +247,8 @@ public class GUI extends JFrame {
 		if (!ItemName.equals("Clear cart")) { // If the button that was pressed is not the "Clear cart"-button an
 												// additional
 												// space is added and this updates the cart to the latest purchase
-			LatestPurchase();
+			LastBought();
 		}
-		updateLabels();
-	}
-
-	private void updateLabels() {
-		totalPrice.setText("Total cost: " + cart.totalCost() + " kr");
-		ItemsInCart.setText("The number of items in cart is: " + cart.itemsInCart());
-	}
-
-	// Updates the the JLabel with the latest purchase
-	private void LatestPurchase() {
-		latestPurchase.setText(
-				cart.lastAddedItemName() + " with cost of " + cart.addedItemPrice() + " kr is being added to the cart");
+		updateTextInApp();
 	}
 }
