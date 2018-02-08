@@ -20,13 +20,13 @@ public class ShoppingCart implements CartGUI {
 	public void addItem(String name) {
 		switch (name) {
 		case "Bag":
-			shoppingCartItems.add(new Bag());
+			shoppingCartItems.add(new ItemBag());
 			break;
 		case "Bicycle":
-			shoppingCartItems.add(new Bicycle());
+			shoppingCartItems.add(new ItemBicycle());
 			break;
 		case "Flashlight":
-			shoppingCartItems.add(new Flashlight());
+			shoppingCartItems.add(new ItemFlashlight());
 			break;
 		}
 	}

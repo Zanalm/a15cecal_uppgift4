@@ -12,18 +12,22 @@ public class GUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private ShoppingCart cart = new ShoppingCart();
 	private JLabel latestPurchase;
-	private JTextArea textWindow;
+	// private JTextArea textWindow;
+	private JTextPane textPane;
+	private JPanel panel;
 	private JLabel totalCost;
 	private JLabel ItemsInCart;
 
 	public GUI(String title) {
 		super(title); // This is for the title at the top of the window to be
 						// shown correctly
-		appSettings(); // Applies all settings for the window defined further
-						// down
+		applicationSettings(); // Applies all settings for the window defined
+								// further
+		// down
 		buttons(); // For creating all the buttons needed
 		TextInApp(); // For creating the labels
 		setTextArea(); // Creates the textArea for the window
+		jFramePanel();
 	}
 
 	private void updateTextInApp() {
@@ -35,7 +39,30 @@ public class GUI extends JFrame {
 		latestPurchase.setText(
 				cart.lastAddedItemName() + " with cost of " + cart.addedItemPrice() + " kr is being added to the cart");
 	}
-
+	private void jFramePanel() {
+		GridBagConstraints ConstraintPanel = new GridBagConstraints();
+		ConstraintPanel.fill = GridBagConstraints.HORIZONTAL;
+		ConstraintPanel.gridx = 1;
+		ConstraintPanel.gridy = 1;
+		ConstraintPanel.gridwidth = 1;
+		Color clr1 = new Color(0.85f, 0.90f, 0.95f);
+		panel = new JPanel();
+		panel.setBackground(Color.GREEN);
+		panel.setLayout(new FlowLayout());
+		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false); // Makes it so that the user can't edit
+		// the text in the textArea, we wouldn't
+		// want that, they are supposed to use
+		// the buttons for editing the cart
+		textPane.setBackground(clr1); // Implements the created color above
+		JScrollPane jScrollPane = new JScrollPane(textPane); // JScrollPane
+																// makes it so
+																// that the user
+																// can scroll in
+																// the
+																// text
+		panel.add(textPane);
+	}
 	// Firstly we set out the layout for how the labels for the cart will be
 	// positioned. This updates the labels
 	private void TextInApp() {
@@ -64,7 +91,17 @@ public class GUI extends JFrame {
 		add(totalCost, c);
 		c.weightx = 0.2;
 		c.gridy = 4;
-		latestPurchase = new JLabel("Nothing in cart, let's change that!", SwingConstants.CENTER); // The SwingConstants is used for positioning the label in the center
+		latestPurchase = new JLabel("Nothing in cart, let's change that!", SwingConstants.CENTER); // The
+																									// SwingConstants
+																									// is
+																									// used
+																									// for
+																									// positioning
+																									// the
+																									// label
+																									// in
+																									// the
+																									// center
 		add(latestPurchase, c);
 	}
 
@@ -254,7 +291,7 @@ public class GUI extends JFrame {
 	 * This sets the size, visibility etc. this is declared in the beginning of
 	 * this file
 	 */
-	private void appSettings() {
+	private void applicationSettings() {
 		setLayout(new GridBagLayout()); // Sets the layout to GridBagLayout
 		this.setSize(400, 450); // Sets the size of the window, decided to make
 								// it kind of like calculator-size
@@ -280,7 +317,7 @@ public class GUI extends JFrame {
 
 	// This is to set the text areas for the application
 	private void setTextArea() {
-		Color clr1 = new Color(0.85f, 0.90f, 0.95f);
+		
 		/*
 		 * This is for changing color, the default colors were too intense so
 		 * created one that fit better. Found that this was the easiest way and
@@ -316,29 +353,25 @@ public class GUI extends JFrame {
 		c.insets = new Insets(0, 15, 0, 150); // This is for the
 												// borders.
 
-		textWindow = new JTextArea();
+		// textPan.setPreferredSize(new Dimension(250, 145)); // Fix the size
+		// for the textPane
+		// textPan.setMinimumSize(new Dimension(10, 10));
+		// StyledDocument doc = textPane.getStyledDocument();
+		// textWindow = new JTextArea();
 
 		// Creates a new JTextArea, from the java.awt-library
-		textWindow.setEditable(false); // Makes it so that the user can't edit
-										// the text in the textArea, we wouldn't
-										// want that, they are supposed to use
-										// the buttons for editing the cart
-		textWindow.setLineWrap(true); // Makes the output-text in the TextArea
-										// jump to a new line when reaching the
-										// end of the area
-		textWindow.setWrapStyleWord(true); // This makes so that the word in
-											// above scenario doesn't get
-											// "chopped-off" in
-											// the middle, the whole word jumps
-											// down a line
-		textWindow.setBackground(clr1); // Implements the created color above
-		JScrollPane jScrollPane = new JScrollPane(textWindow); // JScrollPane
-																// makes it so
-																// that the user
-																// can scroll in
-																// the
-																// textArea
-		add(jScrollPane, c);
+		
+		// textWindow.setLineWrap(true); // Makes the output-text in the
+		// TextArea
+		// jump to a new line when reaching the
+		// end of the area
+		// textWindow.setWrapStyleWord(true); // This makes so that the word in
+		// above scenario doesn't get
+		// "chopped-off" in
+		// the middle, the whole word jumps
+		// down a line
+		
+	
 	}
 
 	// This handles the case when an button is pressed, the set actions for said
@@ -347,22 +380,22 @@ public class GUI extends JFrame {
 		switch (ItemName) {
 		case "Bag":
 			cart.addItem(ItemName);
-			textWindow.append("[Bag] "); /*
-											 * This is the text shown in the
-											 * cart a.k.a the textArea
-											 */
+			textPane.setText("[Bag] "); /*
+										 * This is the text shown in the cart
+										 * a.k.a the textArea
+										 */
 			break;
 		case "Bicycle":
 			cart.addItem(ItemName);
-			textWindow.append("[Bicycle] ");
+			textPane.setText("[Bicycle] ");
 			break;
 		case "Flashlight":
 			cart.addItem(ItemName);
-			textWindow.append("[Flashlight] ");
+			textPane.setText("[Flashlight] ");
 			break;
 		case "Clear cart":
 			cart.clearShoppingCart();
-			textWindow.setText(""); // Makes the textArea look empty
+			textPane.setText(""); // Makes the textArea look empty
 			latestPurchase.setText("Cart was cleared");
 			break;
 		}
