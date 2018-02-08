@@ -19,7 +19,7 @@ public class Uppgift4 {
 	public interface CartGUI {
 		int addedItemPrice();
 
-		void clearCart();
+		void clearShoppingCart();
 
 		int totalCost();
 
@@ -27,7 +27,7 @@ public class Uppgift4 {
 
 		void addItem(String name);
 
-		int itemsInCart();
+		int itemsInShoppingCart();
 	}
 
 }
