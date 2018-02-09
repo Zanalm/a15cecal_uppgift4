@@ -62,4 +62,14 @@ public class ShoppingCart implements CartGUI {
 	public String lastAddedItemName() {
 		return null;
 	}
+	
+	/*
+	 * I need a method that will return all the items names.
+	 * It needs to be displayed in the textPan 
+	 * For now only the last clicked item is showed in the textPan */
+	public String allCartItems() {
+		for(;;) {
+			// do stuff here
+		}
+	}
 }
