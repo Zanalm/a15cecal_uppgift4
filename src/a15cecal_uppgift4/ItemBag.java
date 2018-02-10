@@ -2,11 +2,11 @@ package a15cecal_uppgift4;
 
 // Same as for the Bicycle etc.
 public class ItemBag extends Item {
-	public int getPrice() {
+	public int getItemPrice() {
 		return 300;
 	}
 
-	public String getProductName() {
+	public String getItemName() {
 		return "Bag";
 	}
 

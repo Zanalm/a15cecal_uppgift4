@@ -2,23 +2,23 @@ package a15cecal_uppgift4;
 
 import java.util.ArrayList;
 
-import a15cecal_uppgift4.Uppgift4.CartGUI;
+import a15cecal_uppgift4.Uppgift4.GUI;
 
 // This means that this class will implement the interface CartGUI declared in the file Uppgift4
-public class ShoppingCart implements CartGUI {
-	private ArrayList<Item> shoppingCartItems = new ArrayList<>(); // This initialize a new ArrayList with the type it can
-															// contain set to Item
+public class ShoppingCart implements GUI {
+	private ArrayList<Item> shoppingCartItems = new ArrayList<>(); // This initialize a new ArrayList with the type it
+																	// can
+	// contain set to Item
 
 	// This is for the function clear cart that the user can use, this is also used
-	// in the CartGUI-file as for most of the other methods in this file
-	// This below adds items to the created ArrayList
+	// in the interface-file as for most of the other methods in this file
 	public void clearShoppingCart() {
 		shoppingCartItems.clear();
 	}
 
 	// Adds the item and it's name to the cart
-	public void addItem(String name) {
-		switch (name) {
+	public void addItem(String nameOfItem) {
+		switch (nameOfItem) {
 		case "Bag":
 			shoppingCartItems.add(new ItemBag());
 			break;
@@ -33,43 +33,44 @@ public class ShoppingCart implements CartGUI {
 
 	// This is the method in use for writing out the total price for the cart
 	public int totalCost() {
-		int totalPrice = 0;
+		int totalValue = 0;
 		for (Item item : shoppingCartItems) {
-			totalPrice += item.getPrice();
+			totalValue += item.getItemPrice();
 		}
-		return totalPrice; // writes out the price
+		return totalValue; // writes out the price
 	}
 
-	// Returns the amount of items in cart
+	// Writes out the number of items that the user bought
 	public int itemsInShoppingCart() {
 		return shoppingCartItems.size(); /*
-									 * .size() returns the number of elements in the cart, so this is the size of
-									 * the ArrayList
-									 */
+											 * .size() returns the number of elements in the cart, so this is the size
+											 * of the ArrayList
+											 */
 	}
 
 	// We begin to write out the name of the latest item that was added to the cart
 	public String addedItemName() {
-		return shoppingCartItems.get(shoppingCartItems.size() - 1).getProductName();
+		return shoppingCartItems.get(shoppingCartItems.size() - 1).getItemName();
 	}
 
 	// Then we return the price for said item
 	public int addedItemPrice() {
-		return shoppingCartItems.get(shoppingCartItems.size() - 1).getPrice();
+		return shoppingCartItems.get(shoppingCartItems.size() - 1).getItemPrice();
 	}
 
-	@Override
 	public String lastAddedItemName() {
 		return null;
 	}
-	
+
 	/*
-	 * I need a method that will return all the items names.
-	 * It needs to be displayed in the textPan 
-	 * For now only the last clicked item is showed in the textPan */
+	 * I need a method that will return all the items names. It needs to be
+	 * displayed in the textPan For now only the last clicked item is showed in the
+	 * textPan
+	 */
 	public String allCartItems() {
-		for(;;) {
-			// do stuff here
+		for (int i = 0; i < shoppingCartItems.size(); ) {
+			System.out.println(shoppingCartItems.get(addedItemPrice()).toString());
 		}
+		return null;
 	}
 }
