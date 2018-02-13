@@ -6,11 +6,17 @@ import a15cecal_uppgift4.Uppgift4.GUI;
 
 // This means that this class will implement the interface CartGUI declared in the file Uppgift4
 public class ShoppingCart implements GUI {
-	private ArrayList<Item> shoppingCartItems = new ArrayList<>(); // This initialize a new ArrayList with the type it
+	private ArrayList<Item> shoppingCartItems = new ArrayList<>(); // This
+																	// initialize
+																	// a new
+																	// ArrayList
+																	// with the
+																	// type it
 																	// can
 	// contain set to Item
 
-	// This is for the function clear cart that the user can use, this is also used
+	// This is for the function clear cart that the user can use, this is also
+	// used
 	// in the interface-file as for most of the other methods in this file
 	public void clearShoppingCart() {
 		shoppingCartItems.clear();
@@ -42,13 +48,15 @@ public class ShoppingCart implements GUI {
 
 	// Writes out the number of items that the user bought
 	public int itemsInShoppingCart() {
-		return shoppingCartItems.size(); /*
-											 * .size() returns the number of elements in the cart, so this is the size
-											 * of the ArrayList
-											 */
+		return shoppingCartItems
+				.size(); /*
+							 * .size() returns the number of elements in the
+							 * cart, so this is the size of the ArrayList
+							 */
 	}
 
-	// We begin to write out the name of the latest item that was added to the cart
+	// We begin to write out the name of the latest item that was added to the
+	// cart
 	public String addedItemName() {
 		return shoppingCartItems.get(shoppingCartItems.size() - 1).getItemName();
 	}
@@ -62,15 +70,4 @@ public class ShoppingCart implements GUI {
 		return null;
 	}
 
-	/*
-	 * I need a method that will return all the items names. It needs to be
-	 * displayed in the textPan For now only the last clicked item is showed in the
-	 * textPan
-	 */
-	public String allCartItems() {
-		for (int i = 0; i < shoppingCartItems.size(); ) {
-			System.out.println(shoppingCartItems.get(addedItemPrice()).toString());
-		}
-		return null;
-	}
 }
