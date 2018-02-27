@@ -4,20 +4,22 @@ import java.util.ArrayList;
 
 import a15cecal_uppgift4.Uppgift4.GUI;
 
-// This means that this class will implement the interface CartGUI declared in the file Uppgift4
-public class ShoppingCart implements GUI {
-	private ArrayList<Item> shoppingCartItems = new ArrayList<>(); // This
-																	// initialize
-																	// a new
-																	// ArrayList
-																	// with the
-																	// type it
-																	// can
-	// contain set to Item
+// This means that this class will implement the user interface declared in the file Uppgift4
+public class ShoppingCart implements CartGUI {
+	private ArrayList<Item> shoppingCartItems = new ArrayList<>(); /*
+																	 * This
+																	 * initializes
+																	 * a new
+																	 * ArrayList
+																	 * with the
+																	 * type it
+																	 * can
+																	 * contain
+																	 * set to
+																	 * Item
+																	 */
 
-	// This is for the function clear cart that the user can use, this is also
-	// used
-	// in the interface-file as for most of the other methods in this file
+	/* This is for the function to clear the cart */
 	public void clearShoppingCart() {
 		shoppingCartItems.clear();
 	}
@@ -43,31 +45,39 @@ public class ShoppingCart implements GUI {
 		for (Item item : shoppingCartItems) {
 			totalValue += item.getItemPrice();
 		}
-		return totalValue; // writes out the price
+		return totalValue;
 	}
 
 	// Writes out the number of items that the user bought
 	public int itemsInShoppingCart() {
-		return shoppingCartItems
-				.size(); /*
-							 * .size() returns the number of elements in the
-							 * cart, so this is the size of the ArrayList
-							 */
+		return shoppingCartItems.size();
 	}
 
-	// We begin to write out the name of the latest item that was added to the
+	// Writes out the name of the latest item that was added to the
 	// cart
 	public String addedItemName() {
 		return shoppingCartItems.get(shoppingCartItems.size() - 1).getItemName();
 	}
 
-	// Then we return the price for said item
+	// Returns the price for said item
 	public int addedItemPrice() {
 		return shoppingCartItems.get(shoppingCartItems.size() - 1).getItemPrice();
 	}
 
 	public String lastAddedItemName() {
 		return null;
+	}
+
+	@Override
+	public void addItem() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int addedItemsPrice() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

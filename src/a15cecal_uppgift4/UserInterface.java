@@ -16,7 +16,7 @@ import javax.swing.WindowConstants;
 import javax.swing.text.StyledDocument;
 
 public class UserInterface {
-	JFrame frame = new JFrame("The tiny webshop");
+	JFrame frame = new JFrame("The tiny webshop"); // Title of the window
 	private ShoppingCart cart = new ShoppingCart();
 	JButton BagBtn = new JButton("Bag");
 	JButton BicycleBtn = new JButton("Bicycle");
@@ -33,17 +33,17 @@ public class UserInterface {
 	JLabel totalCost;
 	JLabel latestPurchase;
 
+	/*
+	 * Here we add everything we need for the interface We also declare how
+	 * things should look and be positioned
+	 */
 	public void Initialization() {
-
 		// For the buttons
 		frame.setLayout(new FlowLayout());
 		frame.setSize(500, 400); // sets the size for the window
 		frame.setLocation(100, 100);
-		BicycleBtn.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Changes the
-																// default
-																// cursor, to
-																// indicate it's
-																// click-able
+		/* Changes the default cursor, to indicate it's click-able */
+		BicycleBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		BagBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		FlashlightBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		ClearCartBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -81,7 +81,7 @@ public class UserInterface {
 
 		// For the labels
 		ItemsInCart = new JLabel("The number of items in cart is:  0");
-		totalCost = new JLabel("The total cost is: " + "0 kr"); 
+		totalCost = new JLabel("The total cost is: " + "0 kr");
 		latestPurchase = new JLabel("Nothing in cart, let's change that!");
 
 		// sets size for the cart-area
